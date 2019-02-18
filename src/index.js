@@ -1,12 +1,55 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import App from './App';
-import * as serviceWorker from './serviceWorker';
+import PropTypes from 'prop-types';
+import FileListItem from './fileItem';
 
-ReactDOM.render(<App />, document.getElementById('root'));
+const  FileList = ({ files }) => (
+	<table className="file-list">
+		<tbody>
+			{files.map(file => (
+				<FileListItem key={file.id} file={file}/>
+			))}
+		</tbody>
+	</table>
+	);
+FileList.propTypes = {
+	files: PropTypes.array
+};
 
-// If you want your app to work offline and load faster, you can change
-// unregister() to register() below. Note this comes with some pitfalls.
-// Learn more about service workers: http://bit.ly/CRA-PWA
-serviceWorker.unregister();
+
+
+const testFiles = [
+	{
+		id: 1,
+		name: 'src',
+		type: 'folder',
+		updated_at: "2018-12-12 16:38:26",
+		latestCommit: {
+			message: 'Initial commit'
+		}
+	},
+		{
+			id: 2,
+			name: 'test',
+			type: 'folder',
+			updated_at: "2018-12-12 17:43:30",
+			latestCommit: {
+				message: 'Initial commit'
+			}
+		},
+		{
+			id: 3,
+			name: 'README',
+			type: 'file',
+			updated_at: "2018-12-12 20:02:57",
+			latestCommit: {
+				message: 'Added a readme'
+			}
+		},
+];
+
+
+
+ReactDOM.render(<FileList files={testFiles} />, document.getElementById('root'));
+
